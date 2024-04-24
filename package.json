@@ -1,0 +1,25 @@
+{
+    "name": "french-verbs-tracker",
+    "version": "1.0.0",
+    "description": "A single-page application for managing French verbs, allowing users to add new verbs, view them in alphabetical order, and mark them as conjugated.",
+    "main": "src/server.js",
+    "scripts": {
+      "start": "node src/server.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/fwSara95h/french-verbs-tracker.git"
+    },
+    "author": "Fatema W. S. Hossain <fwsara.h95@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+      "express": "^4.17.1",
+      "mysql": "^2.18.1",
+      "cors": "^2.8.5"
+    },
+    "bugs": {
+      "url": "https://github.com/fwSara95h/french-verbs-tracker/issues"
+    },
+    "homepage": "https://github.com/fwSara95h/french-verbs-tracker#readme"
+  }
+  
