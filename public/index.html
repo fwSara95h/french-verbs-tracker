@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+  }
+  .wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+  }
+  .input-field {
+    margin-bottom: 20px;
+  }
+  .input-field input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+  }
+  .input-field button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-left: none;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    outline: none;
+  }
+  .input-field button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .word-box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .word-item {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+  .delete-btn {
+    margin-left: 8px;
+    cursor: pointer;
+    color: red;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="input-field">
+    <input type="text" id="wordInput" placeholder="Enter a word" />
+    <button id="addButton" disabled>+</button>
+  </div>
+  <div class="word-box" id="wordList">
+    <!-- Words will appear here -->
+  </div>
+</div>
+
+<script>
+  const wordInput = document.getElementById('wordInput');
+  const addButton = document.getElementById('addButton');
+  const wordList = document.getElementById('wordList');
+  let words = ['adorer', 'aimer', 'aller', 'apprendre', 'arriver', 'avoir', 'compléter', 'cuir', 'demander', 'désirer', 'faire', 'finir', 'former', 'habiter', 'jouer', 'lire', 'parler', 'partir', 'pouvoir', 'prendre', 'préférer', 'regarder', 'rêver', "s'appeler", 'travailler', 'téléphoner', 'visiter', 'vouloir', 'épeler', 'étudier', 'être'];
+
+  wordInput.addEventListener('input', () => {
+    addButton.disabled = !wordInput.value.trim();
+  });
+
+  wordInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      addWord();
+    }
+  });
+
+  addButton.addEventListener('click', addWord);
+
+  function addWord() {
+    const newWord = wordInput.value.trim().toLowerCase();
+    if (newWord && !words.includes(newWord)) {
+      words.push(newWord);
+      words.sort();
+      renderWords();
+    }
+    wordInput.value = '';
+    addButton.disabled = true;
+  }
+
+  function renderWords() {
+    wordList.innerHTML = words.map(word => `
+      <div class="word-item">
+        ${word}
+        <span class="delete-btn" onclick="deleteWord('${word}')">X</span>
+      </div>
+    `).join('');
+  }
+
+  function deleteWord(word) {
+    words = words.filter(w => w !== word);
+    renderWords();
+  }
+</script>
+</body>
+</html>
