@@ -1,6 +1,6 @@
-## Project Overview
+# French Verbs Management System
 
-This project is a web application for managing a list of French verbs, including their meanings, conjugation statuses, and links to detailed conjugation pages. The application utilizes a Node.js server with an Express framework, interfacing with a MySQL database, and serves a single-page application (SPA) that allows for CRUD operations on the verbs.
+This project implements a simple single-page application (SPA) for managing French verbs, allowing users to add new verbs, view them in alphabetical order, and mark them as conjugated. The front-end is built using plain HTML, CSS, and JavaScript, while the backend uses Node.js and Express to handle CRUD operations with a MySQL database.
 
 ## File Structure
 
