@@ -4,7 +4,7 @@ This project implements a simple single-page application (SPA) for managing Fren
 
 ## File Structure
 
-```
+```graphql
 french-verbs-tracker/
 │
 ├── public/                      # Public files accessible to the front-end
