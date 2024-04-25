@@ -95,3 +95,21 @@ Open a web browser and go to `http://localhost:3000` to view and interact with t
 - **Delete**: Remove verbs from the list.
 
 This setup ensures a functional local development environment for managing the web application. Follow the instructions carefully to set up and start using the application.
+
+## Contributing
+
+Contributions to this project are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your updates (`git commit -am 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+This `README.md` is designed to be both functional and user-friendly, covering all the necessary steps to get the project running, along with descriptions of the directory structure and how to contribute to the project. Adjust the `<repository-url>` and `<project-directory>` placeholders according to your actual repository's details.
