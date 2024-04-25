@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const addButton = document.getElementById('addButton');
     const wordList = document.getElementById('wordList');
     const modal = document.getElementById('modal');
+    const modalHeader = document.getElementById('modalHeader');
     const closeModal = document.querySelector('.close');
     const saveButton = document.getElementById('saveButton');
     const meaningInput = document.getElementById('meaningInput');
@@ -29,10 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     saveButton.addEventListener('click', () => {
-        const meaning = meaningInput.value.trim();
-        const link = linkInput.value.trim();
-        if (meaning && link) {
-            saveNewWord(currentWord, meaning, link);
+        const meaning = document.getElementById('meaningInput').value.trim();
+        const link = document.getElementById('linkInput').value.trim();
+        
+        if (meaning && link) { 
+            saveNewWord(currentWord, meaning, false, link);
             modal.style.display = 'none';
         }
     });
@@ -46,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.exists) {
                         showBanner();
                     } else {
+                        modalHeader.innerHTML = `<h2>${currentWord}</h2>`;
                         meaningInput.value = '';
                         linkInput.value = '';
                         modal.style.display = 'flex';
@@ -92,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     wordElement.className = 'word-item';
                     wordElement.title = word.meaning;
                     wordElement.innerHTML = `
-                        <input type="checkbox" ${word.is_conjugated ? 'checked' : ''} id="check-${cleanWord(word.infinitif)}">
+                        <input type="checkbox" ${word.conjugated ? 'checked' : ''} id="check-${cleanWord(word.infinitif)}">
                         <a href="${word.conjugation_link}" class="word-link">${word.infinitif}
                             <div class="tooltip">${word.meaning}</div>
                         </a>
@@ -114,18 +117,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    function saveNewWord(infinitif, meaning, is_conjugated, conjugation_link) {
+    function saveNewWord(infinitif, meaning, is_conjugated, conjugation_link) { 
         fetch('/words', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify([ infinitif, meaning, false, conjugation_link ])
+            body: JSON.stringify({ 
+                infinitif: infinitif, 
+                meaning: meaning, 
+                conjugation_link: conjugation_link,
+                is_conjugated: false, 
+             })
         })
-            .then(response => response.json())
-            .then(data => {
-                fetchWords();
-            });
+            .then(response => {
+                if (response.ok) {
+                    fetchWords(); // Refresh the list after deletion
+                }
+            }) 
     }
 
     function updateConjugated(infinitif, is_conjugated) {
@@ -136,10 +145,11 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify({ infinitif, is_conjugated })
         })
-            .then(response => response.json())
-            .then(data => {
-                fetchWords();
-            });
+            .then(response => {
+                if (response.ok) {
+                    fetchWords(); // Refresh the list after deletion
+                }
+            }) 
     }
 
     function showBanner() {
