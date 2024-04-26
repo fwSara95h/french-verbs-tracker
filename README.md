@@ -1,10 +1,10 @@
-## Project Overview
+# French Verbs Management System
 
-This project is a web application for managing a list of French verbs, including their meanings, conjugation statuses, and links to detailed conjugation pages. The application utilizes a Node.js server with an Express framework, interfacing with a MySQL database, and serves a single-page application (SPA) that allows for CRUD operations on the verbs.
+This project implements a simple single-page application (SPA) for managing French verbs, allowing users to add new verbs, view them in alphabetical order, and mark them as conjugated. The front-end is built using plain HTML, CSS, and JavaScript, while the backend uses Node.js and Express to handle CRUD operations with a MySQL database.
 
 ## File Structure
 
-```
+```graphql
 french-verbs-tracker/
 │
 ├── public/                      # Public files accessible to the front-end
@@ -95,3 +95,21 @@ Open a web browser and go to `http://localhost:3000` to view and interact with t
 - **Delete**: Remove verbs from the list.
 
 This setup ensures a functional local development environment for managing the web application. Follow the instructions carefully to set up and start using the application.
+
+## Contributing
+
+Contributions to this project are welcome! To contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your updates (`git commit -am 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+This `README.md` is designed to be both functional and user-friendly, covering all the necessary steps to get the project running, along with descriptions of the directory structure and how to contribute to the project. Adjust the `<repository-url>` and `<project-directory>` placeholders according to your actual repository's details.
