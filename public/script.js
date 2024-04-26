@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const meaningInput = document.getElementById('meaningInput');
     const linkInput = document.getElementById('linkInput');
     let currentWord = '';
+    modal.style.display = 'none';
 
     wordInput.addEventListener('input', () => {
         addButton.disabled = !wordInput.value.trim();
