@@ -1,3 +1,46 @@
+document.getElementById('wordInput').addEventListener('focus', function() {
+    fetch('/verbs/suggestions')
+        .then(response => response.json())
+        .then(data => {
+            const dataList = document.getElementById('verbSuggestions');
+            dataList.innerHTML = '';  // Clear previous options
+            data.forEach((verb) => {
+                const option = document.createElement('option');
+                option.value = verb;
+                dataList.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching verb suggestions:', error));
+});
+
+document.getElementById('wordInput').addEventListener('input', function(e) {
+    const selectedValue = e.target.value;
+    if (!selectedValue) return;
+    fetch(`/words/${selectedValue}`)  // Directly fetch verb details
+        .then(response => {
+            if (response.ok) {
+                return response.json();  // Only proceed if the response is OK
+            } else if (response.status === 404) {
+                throw new Error('Verb not found');  // Throw an error for 404 but do nothing about it
+            }
+            throw new Error('Failed to fetch verb details');
+        })
+        .then(verbDetails => {
+            document.getElementById('modalHeader').innerHTML = `<h2>${selectedValue}</h2>`;
+            document.getElementById('meaningInput').value = verbDetails.meaning || '';
+            document.getElementById('linkInput').value = verbDetails.conjugation_link || '';
+            modal.style.display = 'flex';  // Open the modal with the details filled
+        })
+        .catch(error => {
+            if (error.message === 'Verb not found') {
+                console.log('Verb not found, do nothing');  // Log and do nothing
+            } else {
+                console.error('Error fetching verb:', error);  // Handle other errors differently if needed
+            }
+        });
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     fetchWords();
 

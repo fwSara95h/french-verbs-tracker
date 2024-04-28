@@ -32,6 +32,19 @@ app.get('/words', (req, res) => {
     });
 });
 
+// Fetch all verbs sorted by t_freq for suggestions
+app.get('/verbs/suggestions', (req, res) => {
+    const query = 'SELECT infinitif FROM all_verbs ORDER BY t_freq DESC';
+    connection.query(query, (error, results, fields) => {
+        if (error) {
+            console.error('Failed to fetch verbs', error);
+            res.status(500).send('Error fetching verbs');
+        } else {
+            res.json(results.map(row => row.infinitif));
+        }
+    });
+});
+
 app.get('/words/check/:infinitif', (req, res) => {
     const { infinitif } = req.params;
     connection.query(
@@ -101,6 +114,25 @@ app.delete('/words', (req, res) => {
             res.status(200).send('Word deleted successfully');
         }
     );
+});
+
+// Fetch a single verb's details
+app.get('/words/:infinitif', (req, res) => {
+    const { infinitif } = req.params;
+    const query = 'SELECT * FROM all_verbs WHERE infinitif = ?';
+
+    connection.query(query, [infinitif], (error, results, fields) => {
+        if (error) {
+            console.error('Failed to fetch verb details', error);
+            res.status(500).send('Error fetching verb details');
+        } else {
+            if (results.length > 0) {
+                res.json(results[0]);
+            } else {
+                res.status(404).send('Verb not found');
+            }
+        }
+    });
 });
 
 
