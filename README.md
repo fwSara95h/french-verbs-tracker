@@ -12,15 +12,22 @@ french-verbs-tracker/
 │   └── script.js                # JavaScript file handling client-side logic
 │
 ├── sql/                         # Folder containing SQL setup scripts
-│   ├── create_db_and_table.sql  # SQL script for creating the database and verbs table
+│   ├── create_db_and_table.sql  # SQL script for creating the database and initial verbs table
+│   ├── scraped_verbs.sql        # SQL script for creating tables `all_verbs` and `other_links`
 │   └── sample_inserts.sql       # SQL script for inserting sample data into the table
 │
 ├── src/                         # Source files for the Node.js server
 │   └── server.js                # Main server file with API endpoints
 │
+├── scraper/                     # Folder containing scripts and data for scraping verbs
+│   ├── all_verbs.json           # JSON file containing scraped verb data
+│   ├── collect_verbs.py         # Python script for scraping verbs
+│   ├── fill_db.py               # Python script for populating the database with scraped data
+│   └── requirements.txt         # Python package requirements for the scraper
+│
 ├── package.json                 # Node.js project manifest with metadata and dependencies
-├── package-lock.json            # Automatically generated for any operations where npm modifies either the node_modules tree or package.json
-└── README.md                    # This file; provides an overview and setup instructions
+├── package-lock.json            # Automatically generated file for any operations where npm modifies either the node_modules tree or package.json
+└── README.md                    # Documentation providing an overview of the project, setup, and usage instructions
 ```
 
 ## Local Setup Instructions
